@@ -3,16 +3,16 @@ import 'logger.dart';
 
 Logger _logger = Logger.namedLogger("stat");
 
-bool isWhitespace(String char) {
-  assert(char.length == 1);
-  return char.trim().isEmpty;
-}
-
-const Set<String> vowels = {'a', 'e', 'i', 'o', 'u', 'y'};
+const Set<String> _vowels = {'a', 'e', 'i', 'o', 'u', 'y'};
 
 bool isVowel(String char) {
   assert(char.length == 1);
-  return vowels.contains(char);
+  return _vowels.contains(char);
+}
+
+bool isWhitespace(String char) {
+  assert(char.length == 1);
+  return char.trim().isEmpty;
 }
 
 void char_stat(String text) {
@@ -34,6 +34,7 @@ void char_stat(String text) {
     }
     totalCount++;
   });
+
   _logger.log("Total characters: $totalCount, including: whitespaces: $whitespaceCount, vowels: $vowelsCount");
   _logger.log("Unique non-whitespace chars: ${uniqueChars.length} => ${uniqueChars}");
 }
@@ -52,6 +53,7 @@ void word_stat(String text) {
     }
     wordFrequency.update(word, (value) => value + 1, ifAbsent: () => 1);
   });
+
   if (longestWord == null) {
     _logger.log("Total words: $wordCount, no longest word :(");
   }

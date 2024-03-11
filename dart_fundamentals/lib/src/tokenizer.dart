@@ -1,4 +1,3 @@
-import 'dart:io';
 
 mixin ForEach on Tokenizer {
   void forEach(void Function(String) lambda) {
@@ -9,7 +8,7 @@ mixin ForEach on Tokenizer {
 }
 
 abstract class Tokenizer implements Iterator<String> {
-  String _content;
+  final String _content;
 
   Tokenizer(this._content);
 }
@@ -17,6 +16,7 @@ abstract class Tokenizer implements Iterator<String> {
 class NullTokenizer extends Tokenizer {
   NullTokenizer() : super("");
 
+  @override
   String get current => throw StateError('No more elements');
 
   @override
@@ -62,7 +62,7 @@ class WordTokenizer extends Tokenizer with ForEach {
 }
 
 class LineIterator extends Tokenizer with ForEach {
-  late Iterator<RegExpMatch> _lineIterator;
+  Iterator<RegExpMatch> _lineIterator;
 
   LineIterator(String content)
       : _lineIterator = RegExp(r'.*$', multiLine: true).allMatches(content).iterator
