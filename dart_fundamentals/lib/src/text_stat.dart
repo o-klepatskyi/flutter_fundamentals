@@ -1,7 +1,7 @@
 import 'tokenizer.dart';
 import 'logger.dart';
 
-Logger _logger = Logger.namedLogger("stat");
+Logger _logger = Logger.instance("stat");
 
 const Set<String> _vowels = {'a', 'e', 'i', 'o', 'u', 'y'};
 

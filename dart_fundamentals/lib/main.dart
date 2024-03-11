@@ -2,7 +2,7 @@ import 'src/logger.dart';
 import 'src/text_stat.dart';
 import 'dart:io';
 
-Logger logger = Logger.namedLogger("main");
+Logger logger = Logger.instance("main");
 
 void main() {
   String aboutDart = readFile("dart.txt") ?? "";
@@ -27,7 +27,7 @@ String? readFile(String path) {
   try {
     return File(path).readAsStringSync();
   } catch (e) {
-    Logger.namedLogger("ERROR").log("Failed to open file '$path'");
+    Logger.instance("ERROR").log("Failed to open file '$path'");
     return null;
   }
 }

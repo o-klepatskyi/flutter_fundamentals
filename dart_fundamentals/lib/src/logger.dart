@@ -6,12 +6,10 @@ class Logger {
 
   static final Logger logger = Logger._default();
 
-  factory Logger(String name) {
+  factory Logger.instance(String name) {
     name = name.toUpperCase();
     return _cache.putIfAbsent(name, () => Logger._internal(name: name));
   }
-
-  factory Logger.namedLogger(String name) => Logger(name);
 
   Logger._default() : name = "LOGGER";
   Logger._internal({this.name = "LOGGER"}) {
