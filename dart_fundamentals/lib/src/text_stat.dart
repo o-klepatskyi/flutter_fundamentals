@@ -41,12 +41,12 @@ void char_stat(String text) {
 
 void word_stat(String text) {
   WordTokenizer tokenizer = WordTokenizer(text);
-  int wordCount = 0;
   String? longestWord;
   Map<String, int> wordFrequency = {};
+  List<String> parsedWords = [];
   tokenizer.forEach((word) {
     assert(word.length > 0);
-    wordCount++;
+    parsedWords.add(word);
     longestWord ??= word;
     if (longestWord!.length < word.length) {
       longestWord = word;
@@ -54,14 +54,15 @@ void word_stat(String text) {
     wordFrequency.update(word, (value) => value + 1, ifAbsent: () => 1);
   });
 
-  if (longestWord == null) {
-    _logger.log("Total words: $wordCount, no longest word :(");
+  if (parsedWords.isEmpty) {
+    _logger.log("Total words: 0.");
   }
   else {
     wordFrequency = Map.fromEntries(wordFrequency.entries.toList()
       ..sort((e1, e2) => e2.value.compareTo(e1.value))
     );
-    _logger.log("Total words: $wordCount, longest word is '$longestWord' with length ${longestWord!.length}");
+    _logger.log("Total words: ${parsedWords.length}, longest word is '$longestWord' with length ${longestWord!.length}");
     _logger.log("Word frequency: ${wordFrequency}");
+    _logger.log("All wordes parsed: ${parsedWords}");
   }
 }
