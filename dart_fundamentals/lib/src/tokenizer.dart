@@ -1,16 +1,16 @@
 
+abstract class Tokenizer implements Iterator<String> {
+  final String _content;
+
+  Tokenizer(this._content);
+}
+
 mixin ForEach on Tokenizer {
   void forEach(void Function(String) lambda) {
     while (moveNext()) {
       lambda(current);
     }
   }
-}
-
-abstract class Tokenizer implements Iterator<String> {
-  final String _content;
-
-  Tokenizer(this._content);
 }
 
 class NullTokenizer extends Tokenizer {
