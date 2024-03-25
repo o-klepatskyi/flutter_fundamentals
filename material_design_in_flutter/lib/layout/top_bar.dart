@@ -23,7 +23,7 @@ class GmailTopBar extends AppBar {
             padding: const EdgeInsets.only(left: 8.0),
             child: CircleAvatar(
               backgroundColor: Colors.grey[300],
-              child: Text('OК'),
+              child: const Text('OК'),
             )),
       ],
     )
