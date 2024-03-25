@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'email_list_screen.dart';
 import 'top_bar.dart';
-import 'gmail_drawer.dart';
 
 enum TabIndex { starred, incoming, outgoing, bin }
 
@@ -82,7 +81,30 @@ class GmailAppState extends State<GmailApp>
   }
 
   Widget _buildDrawer() {
-    return Drawer(child: GmailDrawer());
+    return NavigationDrawer(
+        onDestinationSelected: _selectTab,
+        selectedIndex: _currentTab.index,
+        children: [
+          Container(
+            padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
+            decoration: const BoxDecoration(
+              color: Colors.red,
+            ),
+            child: const Text(
+              'GMail',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          ),
+          ...destinations.map(
+            (NavDestination destination) {
+              return NavigationDrawerDestination(
+                label: Text(destination.label),
+                icon: destination.icon,
+                selectedIcon: destination.icon,
+              );
+            },
+          ),
+        ]);
   }
 
   Widget _buildTabBarView() {
