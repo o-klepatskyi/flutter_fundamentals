@@ -23,21 +23,31 @@ class EmailListState extends State<EmailListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const GmailTopBar()),
-        drawer: const Drawer(child: GmailDrawer()),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: ListView.separated(
-            itemCount: emails.length,
-            itemBuilder: (context, index) {
-              return EmailCard(email: emails[index]);
-            },
-            separatorBuilder: (context, index) => const Divider(
-              color: Colors.transparent,
-              height: 10,
-            ),
+      appBar: AppBar(title: const GmailTopBar()),
+      drawer: const Drawer(child: GmailDrawer()),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: ListView.separated(
+          itemCount: emails.length,
+          itemBuilder: (context, index) {
+            return EmailCard(email: emails[index]);
+          },
+          separatorBuilder: (context, index) => const Divider(
+            color: Colors.transparent,
+            height: 10,
           ),
-        ));
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Action to be performed when the button is pressed
+          print('Floating Action Button Pressed');
+        },
+        icon: const Icon(Icons.edit),
+        label: const Text('Написати'),
+        backgroundColor: Colors.redAccent,
+      ),
+    );
   }
 
   createEmails() {
