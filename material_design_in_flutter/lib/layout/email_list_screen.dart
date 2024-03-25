@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'drawer.dart';
 import 'email_card.dart';
-import 'top_bar.dart';
 import '../schema/email.dart';
 
 class EmailListScreen extends StatefulWidget {
@@ -23,8 +21,6 @@ class EmailListState extends State<EmailListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const GmailTopBar()),
-      drawer: const Drawer(child: GmailDrawer()),
       body: Padding(
         padding: const EdgeInsets.only(top: 10.0),
         child: ListView.separated(

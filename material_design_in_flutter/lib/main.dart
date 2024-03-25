@@ -1,16 +1,16 @@
-import 'layout/email_list_screen.dart';
+import 'layout/gmail_app.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const GmailApp());
+void main() => runApp(const MyApp());
 
-class GmailApp extends StatelessWidget {
-  const GmailApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Gmail clone',
-      home: EmailListScreen(),
+      home: GmailApp(),
       debugShowCheckedModeBanner: false,
     );
   }
