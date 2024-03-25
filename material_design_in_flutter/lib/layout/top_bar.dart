@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
 
 class GmailTopBar extends StatelessWidget {
+  const GmailTopBar({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: <Widget>[
         Expanded(
           child: TextField(
             decoration: InputDecoration(
               hintText: 'Пошук у пошті',
-              fillColor: const Color.fromRGBO(247, 229, 215, 100),
+              fillColor: Color.fromRGBO(247, 229, 215, 100),
               filled: true,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 borderSide: BorderSide.none,
               ),
             ),
           ),
         ),
-        Container(
-            padding: const EdgeInsets.only(left: 20.0),
+        Padding(
+            padding: EdgeInsets.only(left: 20.0),
             child: CircleAvatar(
-              backgroundColor: Colors.grey[300],
-              child: const Text('OК'),
+              backgroundColor: Colors.redAccent,
+              child: Text('OК', style: TextStyle(color: Colors.white)),
             )),
       ],
     );

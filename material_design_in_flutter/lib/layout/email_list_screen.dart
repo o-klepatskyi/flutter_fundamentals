@@ -5,6 +5,8 @@ import 'top_bar.dart';
 import '../schema/email.dart';
 
 class EmailListScreen extends StatefulWidget {
+  const EmailListScreen({super.key});
+
   @override
   State<StatefulWidget> createState() => EmailListState();
 }
@@ -21,7 +23,7 @@ class EmailListState extends State<EmailListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: GmailTopBar()),
+        appBar: AppBar(title: const GmailTopBar()),
         drawer: const Drawer(child: GmailDrawer()),
         body: Padding(
           padding: const EdgeInsets.only(top: 10.0),
