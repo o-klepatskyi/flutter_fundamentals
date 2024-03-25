@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'email_list_screen.dart';
 import 'top_bar.dart';
-import 'drawer.dart';
+import 'gmail_drawer.dart';
 
 enum TabIndex { starred, incoming, outgoing, bin }
 
