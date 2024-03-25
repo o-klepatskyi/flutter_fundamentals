@@ -21,15 +21,21 @@ class EmailListState extends State<EmailListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GmailTopBar(),
-      drawer: const GmailDrawer(),
-      body: ListView.builder(
-        itemCount: emails.length,
-        itemBuilder: (context, index) {
-          return EmailCard(email: emails[index]);
-        },
-      ),
-    );
+        appBar: AppBar(title: GmailTopBar()),
+        drawer: Drawer(child: GmailDrawer()),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: ListView.separated(
+            itemCount: emails.length,
+            itemBuilder: (context, index) {
+              return EmailCard(email: emails[index]);
+            },
+            separatorBuilder: (context, index) => const Divider(
+              color: Colors.transparent,
+              height: 10,
+            ),
+          ),
+        ));
   }
 
   createEmails() {

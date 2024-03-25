@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-class GmailTopBar extends AppBar {
-  GmailTopBar({
-    super.key,
-  }) : super(
-    title: Row(
+class GmailTopBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: <Widget>[
         Expanded(
           child: TextField(
@@ -20,12 +19,12 @@ class GmailTopBar extends AppBar {
           ),
         ),
         Container(
-            padding: const EdgeInsets.only(left: 8.0),
+            padding: const EdgeInsets.only(left: 20.0),
             child: CircleAvatar(
               backgroundColor: Colors.grey[300],
               child: const Text('OК'),
             )),
       ],
-    )
-  );
+    );
+  }
 }
