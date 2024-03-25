@@ -46,7 +46,10 @@ class GmailAppState extends State<GmailApp>
   void initState() {
     super.initState();
     _currentTab = TabIndex.incoming;
-    _tabController = TabController(length: tabs.length, vsync: this);
+    _tabController = TabController(
+        length: destinations.length,
+        vsync: this,
+        initialIndex: _currentTab.index);
     _tabController.addListener(() {
       setState(() {
         _currentTab = TabIndex.values[_tabController.index];
@@ -71,11 +74,15 @@ class GmailAppState extends State<GmailApp>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const GmailTopBar()),
-      drawer: const Drawer(child: GmailDrawer()),
+      drawer: _buildDrawer(),
       body: _buildTabBarView(),
       bottomNavigationBar: _buildBottomNavBar(),
       floatingActionButton: _buildActionButton(),
     );
+  }
+
+  Widget _buildDrawer() {
+    return Drawer(child: GmailDrawer());
   }
 
   Widget _buildTabBarView() {
