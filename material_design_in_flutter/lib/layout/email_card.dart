@@ -46,8 +46,10 @@ class EmailCard extends StatelessWidget {
                                 fontSize: 16.0, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            _formatBody(email.body),
+                            email.body,
                             style: const TextStyle(color: Colors.grey),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis
                           ),
                         ],
                       ),
@@ -62,11 +64,6 @@ class EmailCard extends StatelessWidget {
                     ],
                   )
                 ])));
-  }
-
-  String _formatBody(String body) {
-    if (body.length < 50) return body;
-    return "${body.substring(0, 50)}...";
   }
 
   String _formatDate(DateTime datetime) {
