@@ -3,7 +3,8 @@ import 'email_list_screen.dart';
 import 'top_bar.dart';
 import 'drawer.dart';
 
-enum TabItem { starred, incoming, outgoing, bin }
+enum TabIndex { starred, incoming, outgoing, bin }
+
 class GmailApp extends StatefulWidget {
   const GmailApp({super.key});
 
@@ -11,12 +12,33 @@ class GmailApp extends StatefulWidget {
   State<StatefulWidget> createState() => GmailAppState();
 }
 
-class GmailAppState extends State<GmailApp> {
-  TabItem currentTab = TabItem.incoming;
+class GmailAppState extends State<GmailApp>
+    with SingleTickerProviderStateMixin {
+  late TabIndex _currentTab;
+  late TabController _tabController;
 
-  void _selectTab(int tabItem) {
+  @override
+  void initState() {
+    super.initState();
+    _currentTab = TabIndex.incoming;
+    _tabController = TabController(length: TabIndex.values.length, vsync: this);
+    _tabController.addListener(() {
+      setState(() {
+        _currentTab = TabIndex.values[_tabController.index];
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _selectTab(int index) {
     setState(() {
-      currentTab = TabItem.values[tabItem];
+      _currentTab = TabIndex.values[index];
+      _tabController.index = index;
     });
   }
 
@@ -25,7 +47,15 @@ class GmailAppState extends State<GmailApp> {
     return Scaffold(
       appBar: AppBar(title: const GmailTopBar()),
       drawer: const Drawer(child: GmailDrawer()),
-      body: const EmailListScreen(),
+      body: TabBarView(
+        controller: _tabController,
+        children: const [
+          Center(child: Text('Content of Обрані')),
+          EmailListScreen(),
+          Center(child: Text('Content of Надіслані')),
+          Center(child: Text('Content of Кошик')),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -45,12 +75,20 @@ class GmailAppState extends State<GmailApp> {
             label: 'Кошик',
           ),
         ],
-        currentIndex: currentTab.index,
+        currentIndex: _currentTab.index,
         onTap: _selectTab,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.redAccent,
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Action to be performed when the button is pressed
+          print('Floating Action Button Pressed');
+        },
+        icon: const Icon(Icons.edit),
+        label: const Text('Написати'),
+        backgroundColor: Colors.redAccent,
+      ),
     );
   }
-
 }

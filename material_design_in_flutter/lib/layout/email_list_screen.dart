@@ -34,15 +34,6 @@ class EmailListState extends State<EmailListScreen> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // Action to be performed when the button is pressed
-          print('Floating Action Button Pressed');
-        },
-        icon: const Icon(Icons.edit),
-        label: const Text('Написати'),
-        backgroundColor: Colors.redAccent,
-      ),
     );
   }
 
