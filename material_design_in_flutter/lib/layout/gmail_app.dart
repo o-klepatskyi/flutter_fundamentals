@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'email_list_screen.dart';
 import 'top_bar.dart';
+import '../data/email_repository.dart';
 
 enum TabIndex { starred, incoming, outgoing, bin }
 
@@ -40,6 +41,7 @@ class GmailAppState extends State<GmailApp>
       label: 'Кошик',
     ),
   ];
+  final EmailRepository emailRepository = EmailRepository();
 
   @override
   void initState() {
@@ -96,7 +98,7 @@ class GmailAppState extends State<GmailApp>
             ),
           ),
           ...destinations.map(
-            (NavDestination destination) {
+                (NavDestination destination) {
               return NavigationDrawerDestination(
                 label: Text(destination.label),
                 icon: destination.icon,
@@ -108,14 +110,19 @@ class GmailAppState extends State<GmailApp>
   }
 
   Widget _buildTabBarView() {
+    var emails = emailRepository.getAll();
+    List<Widget> tabs = [];
+    int size = emails.length ~/ 4;
+    for (int i = 0; i < 4; i++) {
+      int start = i * size;
+      int end = start + size;
+      var lst = emails.sublist(start, end);
+      lst.sort((a, b) => b.date.compareTo(a.date));
+      tabs.add(EmailListScreen(emails: lst));
+    }
     return TabBarView(
       controller: _tabController,
-      children: const [
-        Center(child: Text('Content of Обрані')),
-        EmailListScreen(),
-        Center(child: Text('Content of Надіслані')),
-        Center(child: Text('Content of Кошик')),
-      ],
+      children: tabs,
     );
   }
 
