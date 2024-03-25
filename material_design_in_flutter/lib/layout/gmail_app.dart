@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'email_list_screen.dart';
 import 'top_bar.dart';
 import '../data/email_repository.dart';
+import 'write_email_screen.dart';
 
 enum TabIndex { starred, incoming, outgoing, bin }
 
@@ -98,7 +99,7 @@ class GmailAppState extends State<GmailApp>
             ),
           ),
           ...destinations.map(
-                (NavDestination destination) {
+            (NavDestination destination) {
               return NavigationDrawerDestination(
                 label: Text(destination.label),
                 icon: destination.icon,
@@ -141,8 +142,8 @@ class GmailAppState extends State<GmailApp>
   Widget _buildActionButton() {
     return FloatingActionButton.extended(
       onPressed: () {
-        // Action to be performed when the button is pressed
-        print('Floating Action Button Pressed');
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const WriteEmailScreen()));
       },
       icon: const Icon(Icons.edit),
       label: const Text('Написати'),
