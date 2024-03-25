@@ -85,14 +85,18 @@ class GmailAppState extends State<GmailApp>
 
   Widget _buildDrawer() {
     return NavigationDrawer(
-        onDestinationSelected: _selectTab,
+        onDestinationSelected: (index) {
+          Navigator.pop(context);
+          _selectTab(index);
+        },
         selectedIndex: _currentTab.index,
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
+            padding: const EdgeInsets.fromLTRB(28, 20, 16, 10),
             decoration: const BoxDecoration(
               color: Colors.red,
             ),
+            margin: const EdgeInsets.only(bottom: 10),
             child: const Text(
               'GMail',
               style: TextStyle(color: Colors.white, fontSize: 20),
@@ -142,8 +146,8 @@ class GmailAppState extends State<GmailApp>
   Widget _buildActionButton() {
     return FloatingActionButton.extended(
       onPressed: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const WriteEmailScreen()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const WriteEmailScreen()));
       },
       icon: const Icon(Icons.edit),
       label: const Text('Написати'),
