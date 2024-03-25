@@ -6,16 +6,27 @@ class GmailDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.zero,
       children: const <Widget>[
         DrawerHeader(
-          child: Text(
-            'GMail',
-            style: TextStyle(
-              color: Colors.red,
-              fontSize: 24,
-            ),
+          decoration: BoxDecoration(
+            color: Colors.red,
           ),
+          child: Stack(
+            children: [
+              Positioned(
+                bottom: 8.0,
+                left: 4.0,
+                child: Text(
+                  "GMail",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              )
+            ],
+          ),
+        ),
+        ListTile(
+          leading: Icon(Icons.star),
+          title: Text('Обрані'),
         ),
         ListTile(
           leading: Icon(Icons.inbox),

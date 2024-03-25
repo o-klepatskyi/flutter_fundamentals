@@ -22,7 +22,7 @@ class EmailListState extends State<EmailListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: GmailTopBar()),
-        drawer: Drawer(child: GmailDrawer()),
+        drawer: const Drawer(child: GmailDrawer()),
         body: Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: ListView.separated(
